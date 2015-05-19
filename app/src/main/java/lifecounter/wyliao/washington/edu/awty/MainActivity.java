@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
                         Intent i = new Intent();
                         i.setAction("lifecounter.wyliao.washington.edu.awty");
                         alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, i, 0);
-                        manager.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + 3000, interval*1000, alarmIntent);
+                        manager.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + 3000, interval*1000*60, alarmIntent);
                     }
                 } else if (str.getText().toString().equals("Stop")) {
                     str.setText("Start");
