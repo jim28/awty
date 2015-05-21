@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +34,10 @@ public class MainActivity extends ActionBarActivity {
         public void onReceive(Context context, Intent intent) {
             alertInfo = phoneNum.getText().toString() + ": " + msg.getText().toString();
             Toast.makeText(MainActivity.this,alertInfo,Toast.LENGTH_SHORT).show();
+
+            //sent the SMS to another device
+            SmsManager smsMag = SmsManager.getDefault();
+            smsMag.sendTextMessage(phoneNum.getText().toString(), null,msg.getText().toString(),null,null);
         }
     };
 
@@ -63,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
                         Intent i = new Intent();
                         i.setAction("lifecounter.wyliao.washington.edu.awty");
                         alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, i, 0);
-                        manager.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + 3000, interval*1000*60, alarmIntent);
+                        manager.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + 3000, interval*1000*5, alarmIntent);
                     }
                 } else if (str.getText().toString().equals("Stop")) {
                     str.setText("Start");
